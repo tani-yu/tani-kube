@@ -63,8 +63,7 @@ kubectl get pod -l SELECTOR
 ```
 kubectl drain NODE_NAME --ignore-daemonsets --force
 ```
-
-## --delete-local-data localにデータを書いているやつはこのオプションも必要っぽい
+--delete-local-data localにデータを書いているやつはこのオプションも必要っぽい
 
 # scheduleから外したnodeを元に戻す
 ```
@@ -74,4 +73,9 @@ kubectl uncordon NODE_NAME
 # namespace 作成
 ```
 kubectl create namespace test-namespace
+```
+
+# 自動起動の確認
+```
+systemctl list-unit-files -t service
 ```
