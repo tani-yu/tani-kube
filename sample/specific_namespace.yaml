@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hogehoge
+  labels:
+    project: hogehoge
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ns-nginx-pod
+  namespace: hogehoge
+spec:
+  containers:
+    - name: ns-nginx
+      image: nginx
+      ports:
+        - containerPort: 80

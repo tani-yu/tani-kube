@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sample-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      pod: nginx
+  template:
+    metadata:
+      labels:
+        pod: nginx
+    spec:
+      containers:
+        - name: nginx-container
+          image: nginx:1.11
+          ports:
+            - containerPort: 80
+
+# record指定でapply
+$ kubectl apply -f deployment.yml --record
+# container名確認
+$ kubectl get deployment -o wide
+# バージョンアップ
+$ kubectl set image deployment/sample-nginx nginx-container=nginx:1.12
+# バージョンアップ確認
+$ kubectl rollout status deployment/sample-nginx
+# history確認
+$ kubectl rollout history deployment/sample-nginx
+# history詳しく確認
+$ kubectl rollout history deployment/sample-nginx --revision 1
+
+# ロールバック
+$ kubectl rollout undo deployment/sample-nginx (--to-revision REV_NUM)
